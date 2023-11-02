@@ -1,21 +1,27 @@
 const models = require('../model')
 const products = models.product
 
-exports.showAll = (req,res) =>{
-    products.find({})
-    .then(data =>{
-        res.send(data)
-    })
-    .catch(err =>{
-        res.status(500).send({
-            message: err.message || 'Error retrieving all products'
-        })
-        console.log(err)
-    })
+exports.showAll = (req, res) => {
+    //#swagger.tags= ['Products']
+    try {
+        products.find({})
+            .then(data => {
+                res.send(data)
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: err.message || 'Error retrieving all products'
+                })
+                console.log(err)
+            })
+    }
+    catch (err) {
+        throw new Error(err);
+    }
 }
 
 exports.create= (req,res) =>{
-    debugger;
+    //#swagger.tags= ['Products']
     if(!req.body.title){
         return res.send(403).body({message : 'Please enter a title'}) 
     }
@@ -39,6 +45,7 @@ exports.create= (req,res) =>{
 }
 
 exports.update = async (req, res) => {
+    //#swagger.tags= ['Products']
     try {
         const id = req.params.id;
         const updatedProduct = await products.findByIdAndUpdate(id, req.body, { useFindAndModify: false });
@@ -59,6 +66,7 @@ exports.update = async (req, res) => {
 }
 
 exports.delete = async(req,res)=>{
+    //#swagger.tags= ['Products']
     try {
         const id = req.params.id;
         const deletedProduct = await products.findByIdAndRemove(id);
@@ -78,6 +86,7 @@ exports.delete = async(req,res)=>{
 }
 
 exports.deleteAll  = async(req,res)=>{
+    //#swagger.tags= ['Products']
     try{
         const deletedProduct = await products.deleteMany();
         if(!deletedProduct){

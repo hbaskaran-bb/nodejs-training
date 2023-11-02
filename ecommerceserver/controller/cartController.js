@@ -2,6 +2,7 @@ const models = require('../model')
 const carts = models.cart
 
 exports.showAll = (req,res) =>{
+    //#swagger.tags= ['Carts']
     carts.find({})
     .then(data =>{
         res.send(data)
@@ -15,6 +16,7 @@ exports.showAll = (req,res) =>{
 }
 
 exports.create = (req, res) => {
+     //#swagger.tags= ['Carts']
     if (!req.body.title) {
         return res.send(403).body({ message: 'Please enter a title' })
     }
@@ -37,6 +39,7 @@ exports.create = (req, res) => {
 }
 
 exports.delete = async (req,res) =>{
+     //#swagger.tags= ['Carts']
     try{
         const id = req.params.id
         const deletedCart = await carts.findByIdAndDelete(id)
@@ -56,6 +59,7 @@ exports.delete = async (req,res) =>{
 }
 
 exports.deleteAll = async(req,res) =>{
+     //#swagger.tags= ['Carts']
     try{
         const deletedCart = await carts.deleteMany();
 
@@ -74,6 +78,7 @@ exports.deleteAll = async(req,res) =>{
 }
 
 exports.update = async(req,res) =>{
+     //#swagger.tags= ['Carts']
     try{
         const id = req.params.id
         const cart = new carts({
