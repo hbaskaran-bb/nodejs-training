@@ -8,7 +8,7 @@ exports.signin = (req, res) => {
     const token = jwt.sign({ id: 123 }
         , authConfig.secret, { expiresIn: 60 * 60 * 24, algorithm: 'HS256' })
         debugger
-    logger.info(`request received ${token}`)
+    logger.putLogEvents(JSON.stringify({message: "request received", token: token}))
     res.send({
         accessToken: token,
         expiresIn: 60 * 60 * 24,

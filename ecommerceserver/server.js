@@ -26,18 +26,10 @@ db.mongoose
     process.exit();
 })
 
-api.use((err,res,req,next)=>{
-    logger.error(err.message)
+api.use((err,req,res,next)=>{
+    //logger.log("error",err.message)
     res.status(500).send(err.message)
 })
-
-// api.get("/", (req,res)=>{
-//     res.json({message: "New Express API"})
-// })
-
-// api.get("/api/products", (req,res)=>{
-//     res.json({message: "New Express API mapped to the products API"})
-// }) // This is for routing to navigate to the products api
 
 
 // setting port and listening for requests

@@ -9,14 +9,14 @@ const options = {
 
 //const config = require('../routes')
 const swaggerAutoGen = require('swagger-autogen')
-
+const config = require('dotenv')
 const doc = {
     info: {
         version: '1.0.0',
         title: 'Ecommerce API',
         description: 'An API for an Ecommerce application'
     },
-    //host: config.host,
+    //host: 'localhost',
     basePath: '/',
     schemes: ['http', 'https'],
     consumes: ['application/json'],
@@ -38,7 +38,6 @@ const doc = {
 }
 const outputFile = './swagger.json'
 const routes = ['../routes/productRoute.js','../routes/cartRoute.js','../routes/authRoute.js'];
-const endpointsFile = ['../routes/*.js','../controller/*.js']
 swaggerAutoGen(outputFile, routes,doc, options).then(()=>{
     require('../server.js')
 })
